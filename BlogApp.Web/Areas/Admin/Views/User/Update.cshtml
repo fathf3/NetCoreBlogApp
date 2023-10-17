@@ -1,0 +1,53 @@
+﻿@model UserUpdateDTO
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <h5 class="card-header">Kullanıcı Güncelleme</h5>
+        <form asp-area="Admin" asp-controller="User" asp-action="Update" enctype="multipart/form-data">
+            <div class="card-body">
+
+                <div asp-validation-summary="ModelOnly"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="m-2">
+                    <label asp-for="RoleId" class="form-label">Kullanıcı Rol</label>
+                    <select id="categoryList" class="form-control text-info" asp-for="RoleId" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"></select>
+                    <span asp-validation-for="RoleId" class="text-danger"></span>
+                </div>
+
+
+                <div class="m-2">
+                    <label asp-for="FirstName" class="form-label">Adınız</label>
+                    <input asp-for="FirstName" type="text" class="form-control" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                </div>
+                <div class="m-2">
+                    <label asp-for="LastName" class="form-label">Soyadınız</label>
+                    <input asp-for="LastName" type="text" class="form-control" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                </div>
+                <div class="m-2">
+                    <label asp-for="Email" class="form-label">Mail Adresnizi</label>
+                    <input asp-for="Email" type="text" class="form-control" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+                <div class="m-2">
+                    <label asp-for="PhoneNumber" class="form-label">Telefon Numaranız</label>
+                    <input asp-for="PhoneNumber" type="text" class="form-control" id="defaultFormControlInput" aria-describedby="defaultFormControlHelp">
+                    <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                </div>
+               
+
+                <div class="form-group m-2">
+                    <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+

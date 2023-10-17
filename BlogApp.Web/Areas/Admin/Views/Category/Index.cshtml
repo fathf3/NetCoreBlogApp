@@ -1,0 +1,64 @@
+﻿@model List<CategoryDTO>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card m-3">
+
+    <a href="/admin/category/add" class="btn btn-primary m-3" >Yeni Kategori Ekle</a>
+    <hr />
+    <div class="table-responsive text-nowrap">
+        <table class="table" id="categoriesTable" cellspacing="0">
+           
+            <thead>
+                
+                <tr>
+                  
+                    <th>isim</th>
+                    <th>Oluşturulma Tarihi</th>
+                    <th>Oluşturan</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            
+            <tfoot>
+                <tr>
+                     <th>isim</th>
+                    <th>Oluşturulma Tarihi</th>
+                    <th>Oluşturan</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </tfoot>
+            <tbody class="table-border-bottom-0">
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td>@category.CreatedDate.ToShortDateString()</td>
+                        <td>@category.CreatedBy</td>
+                        <td>@(category.IsDeleted ? "Aktif Degil" : "Aktif")</td>
+                        <td>
+                            <a class="btn btn-outline-info btn-sm" data-id="@category.Id" asp-area="Admin" asp-controller="Category" asp-action="Update" asp-route-categoryId="@category.Id">
+                                <i class="bx bx-edit"></i>
+                            </a>
+                            <a class="btn btn-outline-danger btn-sm" data-id="@category.Id" asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-categoryId="@category.Id">
+                                <i class="bx bx-minus-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/categoryIndex.js" type="application/ecmascript"></script>
+}
+

@@ -1,0 +1,51 @@
+﻿@model ArticleUpdateDTO
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div class="card">
+        <h5 class="card-header">Makale Düzenle</h5>
+        <form asp-area="Admin" asp-controller="Article" asp-action="Update" enctype="multipart/form-data">
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="m-2">
+                    <select id="categoryList" class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+
+                <div class="m-2">
+                    
+                    <label asp-for="Title" class="form-label">Makale Başlığı</label>
+                    <input asp-for="Title" type="text" class="form-control" id="defaultFormControlInput" placeholder="C# Egitim" aria-describedby="defaultFormControlHelp">
+                    <span class="text-danger" asp-validation-for="Title"></span>
+                </div>
+                <div class="m-2">
+                    <label asp-for="Content" class="form-label">Makale İçeriği</label>
+                    <textarea asp-for="Content" type="text" class="form-control" id="defaultFormControlInput" style="min-height: 200px;" placeholder="C# Egitim" aria-describedby="defaultFormControlHelp"></textarea>
+                    <span class="text-danger" asp-validation-for="Content"></span>
+                </div>
+
+                <div class="m-2">
+                    <label asp-for="Image.FileName" class="form-label m-3 d-block">Mevcut Resim</label>
+                    <img style="height: 15rem; width:15rem;" src="~/images/@Model.Image.FileName" alt="@Model.Title" />
+                   
+                </div>
+
+                <div class="m-2">
+                    <label asp-for="Photo" class="form-label">Resim Ekle</label>
+                    <input asp-for="Photo" type="file" accept="image/*" class="form-control" id="defaultFormControlInput"
+                           aria-describedby="defaultFormControlHelp" />
+                    <span class="text-danger" asp-validation-for="Photo"></span>
+                </div>
+
+                <div class="form-group m-2">
+                    <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
